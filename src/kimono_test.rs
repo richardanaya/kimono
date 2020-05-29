@@ -1,3 +1,5 @@
+use crate::*;
+
 #[test]
 fn it_loads_basic_style() {
     let styles = Kimono::from_string(
