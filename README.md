@@ -9,6 +9,7 @@ A simple CSS engine for a variety of needs.
 - [ ] ordering matters
 - [ ] specificity rules
 - [ ] handle multiple files
+- [ ] nested style support
 
 ```rust
 [dependencies]
