@@ -11,6 +11,12 @@ A simple CSS engine for a variety of needs.
 - [ ] handle multiple files
 
 ```rust
+[dependencies]
+kimono = "0.0"
+```
+# Example
+
+```rust
 use kimono::*;
 
 let k = StyleSheet::from_string(r#"
