@@ -26,15 +26,15 @@ let k = Kimono::from_string(r#"
 "#);
 
 // match by type
-assert_eq!(styles.evaluate("foo","color"), Some("red"));
+assert_eq!(k.evaluate("foo","color"), Some("red"));
 // match by id
-assert_eq!(styles.evaluate("#magic_button","font-size"), Some("black"));
+assert_eq!(k.evaluate("#magic_button","font-size"), Some("black"));
 // match by combination of type and class
-assert_eq!(styles.evaluate("bar.bold","font-weight"), Some("bold"));
+assert_eq!(k.evaluate("bar.bold","font-weight"), Some("bold"));
 // match by complex of type, id and class
-assert_eq!(styles.evaluate("foo#magic_button.bold.title","font-weight"), Some("bold"));
+assert_eq!(k.evaluate("foo#magic_button.bold.title","font-weight"), Some("bold"));
 // handle match fail
-assert_eq!(styles.evaluate("random","random_prop"), None);
+assert_eq!(k.evaluate("random","random_prop"), None);
 ```
 
 # License
