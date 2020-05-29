@@ -9,4 +9,3 @@ repository = "https://github.com/richardanaya/kimono"
 readme="README.md"
 
 [dependencies]
-stretch = "0.3.2"
