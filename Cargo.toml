@@ -1,0 +1,12 @@
+[package]
+name = "kimono"
+version = "0.0.0"
+authors = ["Richard Anaya"]
+edition = "2018"
+description = "A simple CSS engine"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/richardanaya/kimono"
+readme="README.md"
+
+[dependencies]
+stretch = "0.3.2"
