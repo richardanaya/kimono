@@ -17,6 +17,7 @@ let k = Kimono::from_string(r#"
     }
 
     #magic_button {
+        font-color: green;
         font-size: 12px;
     }
 
@@ -26,13 +27,15 @@ let k = Kimono::from_string(r#"
 "#);
 
 // match by type
-assert_eq!(k.evaluate("foo","color"), Some("red"));
+assert_eq!(k.evaluate("foo","color").to_string(), "red");
 // match by id
-assert_eq!(k.evaluate("#magic_button","font-size"), Some("black"));
+assert_eq!(k.evaluate("#magic_button","font-size").to_string(), "green");
 // match by combination of type and class
-assert_eq!(k.evaluate("bar.bold","font-weight"), Some("bold"));
+assert_eq!(k.evaluate("bar.bold","font-weight").to_string(), "bold");
 // match by complex of type, id and class
-assert_eq!(k.evaluate("foo#magic_button.bold.title","font-weight"), Some("bold"));
+assert_eq!(k.evaluate("foo#magic_button.bold.title","font-weight").to_string(), "bold");
+// match by complex property types
+assert_eq!(k.evaluate("#magic_button","font-size"), Some(StyleValue::Value(12,"px")));
 // handle match fail
 assert_eq!(k.evaluate("random","random_prop"), None);
 ```

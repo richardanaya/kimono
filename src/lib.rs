@@ -2,9 +2,10 @@
 mod kimono_test;
 
 trait StyleSheet {
-    fn lookup(&self, path: &str) -> String;
+    fn evaluate(&self, path: &str, prop: &str) -> Option<StyleValue> ;
 }
 
+#[derive(Debug)]
 pub struct Kimono {}
 
 impl Kimono {
@@ -13,12 +14,13 @@ impl Kimono {
     }
 }
 
+#[derive(Debug,PartialEq)]
 enum StyleValue {
-
+    Text(String)
 }
 
 impl StyleSheet for Kimono {
-    fn evaluate(&self, _path: &str) -> StyleValue {
-        "red".to_string()
+    fn evaluate(&self, _path: &str, _prop: &str) -> Option<StyleValue> {
+        Some(StyleValue::Text("red".to_string()))
     }
 }

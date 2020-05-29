@@ -2,12 +2,20 @@ use crate::*;
 
 #[test]
 fn it_loads_basic_style() {
-    let styles = Kimono::from_string(
-        r#"
+    let k = Kimono::from_string(r#"
         foo {
-            color: red
+            color: red;
         }
-    "#,
-    );
-    assert_eq!(styles.lookup("foo.color"), "red");
+
+        #magic_button {
+            font-size: 12px;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+    "#);
+
+    // match by type
+    assert_eq!(k.evaluate("foo","color"), Some(StyleValue::Text("red".to_string())));
 }
