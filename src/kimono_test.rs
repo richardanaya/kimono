@@ -2,7 +2,7 @@ use crate::*;
 
 #[test]
 fn it_loads_basic_style() {
-    let k = StyleSheet::from_string(
+    let k = StyleSheet::from_str(
         r#"
         foo {
             color: red;

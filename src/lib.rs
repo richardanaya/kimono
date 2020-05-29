@@ -5,7 +5,7 @@ mod kimono_test;
 pub struct StyleSheet {}
 
 impl StyleSheet {
-    pub fn from_string(_s: &str) -> Self {
+    pub fn from_str(_s: &str) -> Self {
         StyleSheet {}
     }
 }
