@@ -13,10 +13,26 @@ A simple CSS engine for a variety of needs.
 ```rust
 let k = Kimono::from_string(r#"
     foo {
-        color: red
+        color: red;
+    }
+
+    #magic_button {
+        font-size: 12px;
+    }
+
+    .bold {
+        font-weight: bold;
     }
 "#);
-assert_eq!(styles.lookup("foo.color"), "red");
+
+// match by type
+assert_eq!(styles.evaluate(Some("foo"),None,None,"color"), Some("red"));
+// match by id
+assert_eq!(styles.evaluate(None,Some("#magic_button"),None,"font-size"), Some("black"));
+// match by class
+assert_eq!(styles.evaluate(Some("bar"),None,Some(".bold"),"font-weight"), Some("bold"));
+// handle match fail
+assert_eq!(styles.evaluate(None,Some("#random"),None,"random_prop"), None);
 ```
 
 # License

@@ -13,8 +13,12 @@ impl Kimono {
     }
 }
 
+enum StyleValue {
+
+}
+
 impl StyleSheet for Kimono {
-    fn lookup(&self, _path: &str) -> String {
+    fn evaluate(&self, _path: &str) -> StyleValue {
         "red".to_string()
     }
 }
