@@ -2,7 +2,8 @@ use crate::*;
 
 #[test]
 fn it_loads_basic_style() {
-    let k = Kimono::from_string(r#"
+    let k = StyleSheet::from_string(
+        r#"
         foo {
             color: red;
         }
@@ -14,8 +15,12 @@ fn it_loads_basic_style() {
         .bold {
             font-weight: bold;
         }
-    "#);
+    "#,
+    );
 
     // match by type
-    assert_eq!(k.evaluate("foo","color"), Some(StyleValue::Text("red".to_string())));
+    assert_eq!(
+        k.evaluate("foo", "color"),
+        Some(StyleValue::Text("red".to_string()))
+    );
 }

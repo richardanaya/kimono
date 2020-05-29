@@ -1,25 +1,21 @@
 #[cfg(test)]
 mod kimono_test;
 
-trait StyleSheet {
-    fn evaluate(&self, path: &str, prop: &str) -> Option<StyleValue> ;
-}
-
 #[derive(Debug)]
-pub struct Kimono {}
+pub struct StyleSheet {}
 
-impl Kimono {
+impl StyleSheet {
     pub fn from_string(_s: &str) -> Self {
-        Kimono {}
+        StyleSheet {}
     }
 }
 
-#[derive(Debug,PartialEq)]
+#[derive(Debug, PartialEq)]
 enum StyleValue {
-    Text(String)
+    Text(String),
 }
 
-impl StyleSheet for Kimono {
+impl StyleSheet {
     fn evaluate(&self, _path: &str, _prop: &str) -> Option<StyleValue> {
         Some(StyleValue::Text("red".to_string()))
     }
