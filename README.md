@@ -1,5 +1,7 @@
 # kimono
 
+<a href="https://docs.rs/kimono"><img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square" alt="docs.rs docs" /></a>
+
 A simple CSS engine for a variety of needs.
 
 - [x] style agnostic 
