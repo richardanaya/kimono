@@ -11,7 +11,9 @@ A simple CSS engine for a variety of needs.
 - [ ] handle multiple files
 
 ```rust
-let k = Kimono::from_string(r#"
+use kimono::*;
+
+let k = StyleSheet::from_string(r#"
     foo {
         color: red;
     }
