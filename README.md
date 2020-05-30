@@ -38,7 +38,7 @@ let k = StyleSheet::from_string(r#"
 // match by type
 assert_eq!(k.evaluate("foo","color").to_string(), "red");
 // match by id
-assert_eq!(k.evaluate("#magic_button","font-size").to_string(), "green");
+assert_eq!(k.evaluate("#magic_button","font-color").to_string(), "green");
 // match by combination of type and class
 assert_eq!(k.evaluate("bar.bold","font-weight").to_string(), "bold");
 // match by complex of type, id and class
