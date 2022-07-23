@@ -8,9 +8,9 @@ A simple terminal css engine inspired by [lipgloss](https://github.com/charmbrac
 cargo add kimono
 ```
 # Example
+<img width="189" alt="Screen Shot 2022-07-23 at 4 38 47 PM" src="https://user-images.githubusercontent.com/294042/180626222-c070e4a7-020c-43ed-96bc-79ebb28371f4.png">
 
 ```rust
-use ansi_escapes::*;
 use kimono::*;
 
 const STYLE: Style = Style::new()
@@ -18,6 +18,8 @@ const STYLE: Style = Style::new()
     .padding_left(1)
     .padding_right(2)
     .padding_bottom(3)
+    .border(1)
+    .border_color(0xbc5633)
     .color(0xebdeb8)
     .background(0x407955);
 
@@ -26,8 +28,10 @@ fn main() {
     STYLE.render("着物");
     print!("{}", CursorMove::XY(-10, 3));
 }
+
 ```
-<img width="377" alt="Screen Shot 2022-07-23 at 2 23 28 PM" src="https://user-images.githubusercontent.com/294042/180623295-f0a7f94f-19b1-476d-9d48-04c29478911e.png">
+
+
 
 # License
 
