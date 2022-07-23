@@ -1,9 +1,9 @@
 [package]
 name = "kimono"
-version = "0.0.0"
+version = "0.0.1"
 authors = ["Richard Anaya"]
 edition = "2018"
-description = "A simple CSS engine"
+description = "A simple terminal CSS library"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/richardanaya/kimono"
 readme="README.md"

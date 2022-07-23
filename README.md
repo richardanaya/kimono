@@ -2,51 +2,27 @@
 
 <a href="https://docs.rs/kimono"><img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square" alt="docs.rs docs" /></a>
 
-A simple CSS engine for a variety of needs.
-
-- [x] style agnostic 
-- [ ] simple typed extraction support
-- [ ] ordering matters
-- [ ] specificity rules
-- [ ] handle multiple files
-- [ ] nested style support
+A simple terminal css engine inspired by [lipgloss](https://github.com/charmbracelet/lipgloss)
 
 ```rust
-[dependencies]
-kimono = "0.0"
+cargo add kimono
 ```
 # Example
 
 ```rust
 use kimono::*;
 
-let k = StyleSheet::from_string(r#"
-    foo {
-        color: red;
-    }
+const STYLE: Style = Style::new()
+    .top_padding(1)
+    .left_padding(1)
+    .right_padding(2)
+    .bottom_padding(3)
+    .color(0xff0000)
+    .background(0x00ff00);
 
-    #magic_button {
-        font-color: green;
-        font-size: 12px;
-    }
-
-    .bold {
-        font-weight: bold;
-    }
-"#);
-
-// match by type
-assert_eq!(k.evaluate("foo","color").to_string(), "red");
-// match by id
-assert_eq!(k.evaluate("#magic_button","font-color").to_string(), "green");
-// match by combination of type and class
-assert_eq!(k.evaluate("bar.bold","font-weight").to_string(), "bold");
-// match by complex of type, id and class
-assert_eq!(k.evaluate("foo#magic_button.bold.title","font-weight").to_string(), "bold");
-// match by complex property types
-assert_eq!(k.evaluate("#magic_button","font-size"), Some(StyleValue::Value(12,"px")));
-// handle match fail
-assert_eq!(k.evaluate("random","random_prop"), None);
+fn main() {
+    STYLE.render("Hello World!")
+}
 ```
 
 # License

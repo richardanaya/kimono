@@ -9,5 +9,5 @@ const STYLE: Style = Style::new()
     .background(0x00ff00);
 
 fn main() {
-    STYLE.render("hey!!!!!")
+    STYLE.render("Hello World!")
 }
