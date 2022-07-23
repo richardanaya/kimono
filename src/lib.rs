@@ -25,22 +25,22 @@ impl Style {
         }
     }
 
-    pub const fn left_padding(mut self, padding: usize) -> Self {
+    pub const fn padding_left(mut self, padding: usize) -> Self {
         self.padding.0 = padding;
         self
     }
 
-    pub const fn top_padding(mut self, padding: usize) -> Self {
+    pub const fn padding_top(mut self, padding: usize) -> Self {
         self.padding.1 = padding;
         self
     }
 
-    pub const fn right_padding(mut self, padding: usize) -> Self {
+    pub const fn padding_right(mut self, padding: usize) -> Self {
         self.padding.2 = padding;
         self
     }
 
-    pub const fn bottom_padding(mut self, padding: usize) -> Self {
+    pub const fn padding_bottom(mut self, padding: usize) -> Self {
         self.padding.3 = padding;
         self
     }

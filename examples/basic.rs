@@ -2,10 +2,10 @@ use ansi_escapes::*;
 use kimono::*;
 
 const STYLE: Style = Style::new()
-    .top_padding(1)
-    .left_padding(1)
-    .right_padding(2)
-    .bottom_padding(3)
+    .padding_top(1)
+    .padding_left(1)
+    .padding_right(2)
+    .padding_bottom(3)
     .color(0xebdeb8)
     .background(0x407955);
 
