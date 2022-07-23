@@ -9,3 +9,5 @@ repository = "https://github.com/richardanaya/kimono"
 readme="README.md"
 
 [dependencies]
+ansi-escapes = "0.1.1"
+colored = "2.0.0"
