@@ -1,4 +1,3 @@
-use ansi_escapes::*;
 use kimono::*;
 
 const STYLE: Style = Style::new()
@@ -6,6 +5,8 @@ const STYLE: Style = Style::new()
     .padding_left(1)
     .padding_right(2)
     .padding_bottom(3)
+    .border(1)
+    .border_color(0xbc5633)
     .color(0xebdeb8)
     .background(0x407955);
 
