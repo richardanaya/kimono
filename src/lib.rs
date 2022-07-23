@@ -1,5 +1,6 @@
 use ansi_escapes::CursorMove;
 use colored::Colorize;
+use unicode_width::UnicodeWidthStr;
 
 pub struct Style {
     color: (u8, u8, u8),
@@ -55,7 +56,7 @@ impl Style {
     }
 
     pub fn render(&self, text: &str) {
-        let width = text.chars().count() + self.padding.0 + self.padding.2;
+        let width = UnicodeWidthStr::width(text) + self.padding.0 + self.padding.2;
         let top = create_string_with_char(' ', width);
         let bottom = create_string_with_char(' ', width);
         let left = create_string_with_char(' ', self.padding.0);

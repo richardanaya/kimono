@@ -1,3 +1,4 @@
+use ansi_escapes::*;
 use kimono::*;
 
 const STYLE: Style = Style::new()
@@ -5,9 +6,11 @@ const STYLE: Style = Style::new()
     .left_padding(1)
     .right_padding(2)
     .bottom_padding(3)
-    .color(0xff0000)
-    .background(0x00ff00);
+    .color(0xebdeb8)
+    .background(0x407955);
 
 fn main() {
-    STYLE.render("Hello World!")
+    print!("{}{}", ClearScreen, CursorMove::XY(10, 3));
+    STYLE.render("着物");
+    print!("{}", CursorMove::XY(-10, 3));
 }
