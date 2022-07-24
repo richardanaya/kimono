@@ -8,6 +8,9 @@ A simple terminal css engine inspired by [lipgloss](https://github.com/charmbrac
 cargo add kimono
 ```
 # Example
+
+*Unicode text can be styled, padded, and bordered.*
+
 <img width="180" alt="Screen Shot 2022-07-23 at 5 01 28 PM" src="https://user-images.githubusercontent.com/294042/180626676-67a67dff-25fa-4deb-8cc9-683e17ca9a64.png">
 
 ```rust
@@ -32,7 +35,7 @@ fn main() {
 }
 ```
 
-Text can be constrained.
+*Text can be constrained to height and width.*
 
 <img width="188" alt="Screen Shot 2022-07-23 at 9 17 45 PM" src="https://user-images.githubusercontent.com/294042/180631984-110f096e-1b55-4a03-9e54-5e178a13034f.png">
 
@@ -52,7 +55,8 @@ fn main() {
     println!("{:?}", STYLE.measure("abcdefghijklmno"));
 }
 ```
-Text can be measured
+
+*Text can be measured.*
 
 ```
 (8, 5)
