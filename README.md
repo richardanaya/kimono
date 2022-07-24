@@ -45,7 +45,7 @@ fn main() {
 }
 ```
 
-*Text can be constrained to height and width.*
+*Text can be constrained to width and/or height.*
 
 <img width="188" alt="Screen Shot 2022-07-23 at 9 17 45 PM" src="https://user-images.githubusercontent.com/294042/180631984-110f096e-1b55-4a03-9e54-5e178a13034f.png">
 
@@ -99,14 +99,14 @@ const STYLE: Style = Style::new()
     .border(1)
     .italic()
     .border_style(BorderStyle {
-        top_left: Some(' '),
+        top_left: None,
         top: Some('•'),
-        top_right: Some(' '),
+        top_right: None,
         left: Some('•'),
         right: Some('•'),
-        bottom_left: Some(' '),
+        bottom_left: None,
         bottom: Some('•'),
-        bottom_right: Some(' '),
+        bottom_right: None,
         bold: true,
         italic: false,
         underline: false,
