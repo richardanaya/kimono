@@ -1,4 +1,5 @@
 pub use ansi_escapes::*;
+use colored::ColoredString;
 use colored::Colorize;
 use unicode_width::UnicodeWidthStr;
 
@@ -12,14 +13,18 @@ struct Quad {
 
 #[derive(Default)]
 pub struct BorderStyle {
-    top_left: Option<char>,
-    top: Option<char>,
-    top_right: Option<char>,
-    left: Option<char>,
-    right: Option<char>,
-    bottom_left: Option<char>,
-    bottom: Option<char>,
-    bottom_right: Option<char>,
+    pub top_left: Option<char>,
+    pub top: Option<char>,
+    pub top_right: Option<char>,
+    pub left: Option<char>,
+    pub right: Option<char>,
+    pub bottom_left: Option<char>,
+    pub bottom: Option<char>,
+    pub bottom_right: Option<char>,
+    pub bold: bool,
+    pub italic: bool,
+    pub underline: bool,
+    pub strikethrough: bool,
 }
 
 pub const BORDER_STYLE_DEFAULT: BorderStyle = BorderStyle {
@@ -31,6 +36,10 @@ pub const BORDER_STYLE_DEFAULT: BorderStyle = BorderStyle {
     bottom_left: Some(' '),
     bottom: Some(' '),
     bottom_right: Some(' '),
+    bold: false,
+    italic: false,
+    underline: false,
+    strikethrough: false,
 };
 
 pub const BORDER_STYLE_OUTLINE: BorderStyle = BorderStyle {
@@ -42,6 +51,25 @@ pub const BORDER_STYLE_OUTLINE: BorderStyle = BorderStyle {
     bottom_left: Some('└'),
     bottom: Some('─'),
     bottom_right: Some('┘'),
+    bold: false,
+    italic: false,
+    underline: false,
+    strikethrough: false,
+};
+
+pub const BORDER_STYLE_THICK_OUTLINE: BorderStyle = BorderStyle {
+    top_left: Some('┌'),
+    top: Some('─'),
+    top_right: Some('┐'),
+    left: Some('│'),
+    right: Some('│'),
+    bottom_left: Some('└'),
+    bottom: Some('─'),
+    bottom_right: Some('┘'),
+    bold: true,
+    italic: false,
+    underline: false,
+    strikethrough: false,
 };
 
 pub struct Style {
@@ -54,6 +82,56 @@ pub struct Style {
     width: Option<usize>,
     height: Option<usize>,
     border_style: Option<BorderStyle>,
+    bold: bool,
+    italic: bool,
+    underline: bool,
+    strikethrough: bool,
+}
+
+fn style_str(
+    text: &str,
+    bold: bool,
+    italic: bool,
+    underline: bool,
+    strikethrough: bool,
+) -> ColoredString {
+    let mut result: ColoredString = text.into();
+    if bold {
+        result = result.bold();
+    }
+    if italic {
+        result = result.italic();
+    }
+    if underline {
+        result = result.underline();
+    }
+    if strikethrough {
+        result = result.strikethrough();
+    }
+    result
+}
+
+fn style_text(
+    text: &ColoredString,
+    bold: bool,
+    italic: bool,
+    underline: bool,
+    strikethrough: bool,
+) -> ColoredString {
+    let mut result: ColoredString = text.clone();
+    if bold {
+        result = result.bold();
+    }
+    if italic {
+        result = result.italic();
+    }
+    if underline {
+        result = result.underline();
+    }
+    if strikethrough {
+        result = result.strikethrough();
+    }
+    result
 }
 
 fn create_string_with_char(char: char, length: usize) -> String {
@@ -90,6 +168,10 @@ impl Style {
             width: None,
             height: None,
             border_style: None,
+            bold: false,
+            italic: false,
+            underline: false,
+            strikethrough: false,
         }
     }
 
@@ -247,76 +329,76 @@ impl Style {
         let left = create_string_with_char(' ', self.padding.left);
         let right = create_string_with_char(' ', self.padding.right);
 
-        let border_top = create_string_with_char(
-            self.border_style
-                .as_ref()
-                .unwrap_or(&BORDER_STYLE_DEFAULT)
-                .top
-                .unwrap_or(' '),
-            width,
+        let current_border_style = self.border_style.as_ref().unwrap_or(&BORDER_STYLE_DEFAULT);
+
+        let border_top = style_str(
+            &create_string_with_char(current_border_style.top.unwrap_or(' '), width),
+            current_border_style.bold,
+            current_border_style.italic,
+            current_border_style.underline,
+            current_border_style.strikethrough,
         );
-        let border_bottom = create_string_with_char(
-            self.border_style
-                .as_ref()
-                .unwrap_or(&BORDER_STYLE_DEFAULT)
-                .bottom
-                .unwrap_or(' '),
-            width,
+        let border_bottom = style_str(
+            &create_string_with_char(current_border_style.bottom.unwrap_or(' '), width),
+            current_border_style.bold,
+            current_border_style.italic,
+            current_border_style.underline,
+            current_border_style.strikethrough,
         );
-        let border_left = create_string_with_char(
-            self.border_style
-                .as_ref()
-                .unwrap_or(&BORDER_STYLE_DEFAULT)
-                .left
-                .unwrap_or(' '),
+        let border_left = style_str(
+            &create_string_with_char(current_border_style.left.unwrap_or(' '), self.border.left),
+            current_border_style.bold,
+            current_border_style.italic,
+            current_border_style.underline,
+            current_border_style.strikethrough,
+        );
+        let border_right = style_str(
+            &create_string_with_char(current_border_style.right.unwrap_or(' '), self.border.right),
+            current_border_style.bold,
+            current_border_style.italic,
+            current_border_style.underline,
+            current_border_style.strikethrough,
+        );
+        let border_top_left =  style_str(&create_string_with_char(
+            current_border_style.top_left.unwrap_or(' '),
             self.border.left,
+        ), current_border_style.bold, current_border_style.italic, current_border_style.underline, current_border_style.strikethrough);
+        let border_top_right = style_str(
+            &create_string_with_char(
+                current_border_style.top_right.unwrap_or(' '),
+                self.border.right,
+            ),
+            current_border_style.bold,
+            current_border_style.italic,
+            current_border_style.underline,
+            current_border_style.strikethrough,
         );
-        let border_right = create_string_with_char(
-            self.border_style
-                .as_ref()
-                .unwrap_or(&BORDER_STYLE_DEFAULT)
-                .right
-                .unwrap_or(' '),
-            self.border.right,
+        let border_bottom_left = style_str(
+            &create_string_with_char(
+                current_border_style.bottom_left.unwrap_or(' '),
+                self.border.left,
+            ),
+            current_border_style.bold,
+            current_border_style.italic,
+            current_border_style.underline,
+            current_border_style.strikethrough,
         );
-        let border_top_left = create_string_with_char(
-            self.border_style
-                .as_ref()
-                .unwrap_or(&BORDER_STYLE_DEFAULT)
-                .top_left
-                .unwrap_or(' '),
-            self.border.left,
-        );
-        let border_top_right = create_string_with_char(
-            self.border_style
-                .as_ref()
-                .unwrap_or(&BORDER_STYLE_DEFAULT)
-                .top_right
-                .unwrap_or(' '),
-            self.border.right,
-        );
-        let border_bottom_left = create_string_with_char(
-            self.border_style
-                .as_ref()
-                .unwrap_or(&BORDER_STYLE_DEFAULT)
-                .bottom_left
-                .unwrap_or(' '),
-            self.border.left,
-        );
-        let border_bottom_right = create_string_with_char(
-            self.border_style
-                .as_ref()
-                .unwrap_or(&BORDER_STYLE_DEFAULT)
-                .bottom_right
-                .unwrap_or(' '),
-            self.border.right,
+        let border_bottom_right = style_str(
+            &create_string_with_char(
+                current_border_style.bottom_right.unwrap_or(' '),
+                self.border.right,
+            ),
+            current_border_style.bold,
+            current_border_style.italic,
+            current_border_style.underline,
+            current_border_style.strikethrough,
         );
 
         // top
         for _ in 0..self.border.top {
             print!(
                 "{}",
-                border_top_left
+                border_top_left.clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -331,6 +413,7 @@ impl Style {
             print!(
                 "{}",
                 border_top
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -345,6 +428,7 @@ impl Style {
             print!(
                 "{}{}",
                 border_top_right
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -362,6 +446,7 @@ impl Style {
             print!(
                 "{}",
                 border_left
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -380,6 +465,7 @@ impl Style {
             print!(
                 "{}{}",
                 border_right
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -399,6 +485,7 @@ impl Style {
             print!(
                 "{}",
                 border_left
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -418,8 +505,15 @@ impl Style {
             let padding = create_string_with_char(' ', padding_len);
             print!(
                 "{}{}",
-                line.truecolor(self.color.0, self.color.1, self.color.2)
-                    .on_truecolor(self.background.0, self.background.1, self.background.2),
+                style_text(
+                    &line
+                        .truecolor(self.color.0, self.color.1, self.color.2)
+                        .on_truecolor(self.background.0, self.background.1, self.background.2),
+                    self.bold,
+                    self.italic,
+                    self.underline,
+                    self.strikethrough
+                ),
                 padding
                     .truecolor(self.color.0, self.color.1, self.color.2)
                     .on_truecolor(self.background.0, self.background.1, self.background.2)
@@ -431,6 +525,7 @@ impl Style {
             print!(
                 "{}{}",
                 border_right
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -450,6 +545,7 @@ impl Style {
             print!(
                 "{}",
                 border_left
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -468,6 +564,7 @@ impl Style {
             print!(
                 "{}{}",
                 border_right
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -485,6 +582,7 @@ impl Style {
             print!(
                 "{}",
                 border_bottom_left
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -499,6 +597,7 @@ impl Style {
             print!(
                 "{}",
                 border_bottom
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -513,6 +612,7 @@ impl Style {
             print!(
                 "{}{}",
                 border_bottom_right
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,
@@ -526,6 +626,11 @@ impl Style {
                 CursorMove::XY(-(full_width as i16), 1)
             );
         }
+    }
+
+    pub fn render_at_position(&self, x: u16, y: u16, text: &str) {
+        print!("{}", CursorTo::AbsoluteXY(x, y));
+        self.render(text)
     }
 
     pub fn measure(&self, text: &str) -> (usize, usize) {
@@ -542,4 +647,29 @@ impl Style {
             + self.border.bottom;
         (cols, rows)
     }
+
+    pub const fn bold(mut self) -> Self {
+        self.bold = true;
+        self
+    }
+
+    pub const fn italic(mut self) -> Self {
+        self.italic = true;
+        self
+    }
+
+    pub const fn underline(mut self) -> Self {
+        self.underline = true;
+        self
+    }
+
+    pub const fn strikethrough(mut self) -> Self {
+        self.strikethrough = true;
+        self
+    }
+}
+
+pub fn clear_screen() {
+    print!("{}", CursorMove::XY(0, 0));
+    print!("{}", EraseScreen);
 }
