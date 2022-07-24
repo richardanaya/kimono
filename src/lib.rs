@@ -188,15 +188,58 @@ impl Style {
         self
     }
 
-    pub fn render(&self, text: &str) {
-        let text: Vec<String> = text
+    fn prepare_text(&self, text: &str) -> (Vec<String>, usize) {
+        let mut text: Vec<String> = text
             .replace("\t", "    ")
             .lines()
             .map(|line| line.trim().to_string())
             .collect();
+        if let Some(w) = self.width {
+            let mut max_content_width =
+                w - self.padding.left - self.padding.right - self.border.left - self.border.right;
+            max_content_width = max_content_width.max(0);
+            if max_content_width == 0 {
+                text = vec![];
+            } else {
+                let mut new_lines = vec![];
+                {
+                    for line in text.iter_mut() {
+                        let line_width = get_unicode_length(line);
+                        if line_width > max_content_width {
+                            let mut new_line = String::new();
+                            let mut line_width = 0;
+                            for c in line.chars() {
+                                let c_width = get_unicode_length(&c.to_string());
+                                if line_width + c_width > max_content_width {
+                                    new_lines.push(new_line);
+                                    new_line = String::new();
+                                    line_width = 0;
+                                }
+                                new_line.push(c);
+                                line_width += c_width;
+                            }
+                            new_lines.push(new_line);
+                            break;
+                        }
+                    }
+                }
+                text = new_lines;
+            }
+        }
+        if let Some(h) = self.height {
+            let mut max_content_height =
+                h - self.border.top - self.border.bottom - self.padding.top - self.padding.bottom;
+            max_content_height = max_content_height.max(0);
+            text = text.iter().take(max_content_height).cloned().collect();
+        }
         let max_len = text
             .iter()
             .fold(0, |max, line| max.max(get_unicode_length(line)));
+        (text, max_len)
+    }
+
+    pub fn render(&self, text: &str) {
+        let (text, max_len) = self.prepare_text(text);
         let width = max_len + self.padding.left + self.padding.right;
         let full_width = width + self.border.left + self.border.right;
         let top = create_string_with_char(' ', width);
@@ -377,8 +420,9 @@ impl Style {
                 "{}{}",
                 line.truecolor(self.color.0, self.color.1, self.color.2)
                     .on_truecolor(self.background.0, self.background.1, self.background.2),
-                padding.truecolor(self.color.0, self.color.1, self.color.2)
-                .on_truecolor(self.background.0, self.background.1, self.background.2)
+                padding
+                    .truecolor(self.color.0, self.color.1, self.color.2)
+                    .on_truecolor(self.background.0, self.background.1, self.background.2)
             );
             print!(
                 "{}",
@@ -482,5 +526,20 @@ impl Style {
                 CursorMove::XY(-(full_width as i16), 1)
             );
         }
+    }
+
+    pub fn measure(&self, text: &str) -> (usize, usize) {
+        let (text, max_width) = self.prepare_text(text);
+        let cols = max_width
+            + self.padding.left
+            + self.padding.right
+            + self.border.left
+            + self.border.right;
+        let rows = text.len()
+            + self.padding.top
+            + self.padding.bottom
+            + self.border.top
+            + self.border.bottom;
+        (cols, rows)
     }
 }
