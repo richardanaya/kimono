@@ -32,7 +32,45 @@ fn main() {
 }
 ```
 
+Text can be constrained.
 
+<img width="188" alt="Screen Shot 2022-07-23 at 9 17 45 PM" src="https://user-images.githubusercontent.com/294042/180631984-110f096e-1b55-4a03-9e54-5e178a13034f.png">
+
+```
+use kimono::*;
+
+const STYLE: Style = Style::new()
+    .padding(1)
+    .color(0xfffd7c)
+    .width(8)
+    .background(0x956471);
+
+fn main() {
+    print!("{}{}", ClearScreen, CursorMove::XY(10, 3));
+    STYLE.render(text);
+    print!("{}", CursorMove::XY(-10, 3));
+    println!("{:?}", STYLE.measure("abcdefghijklmno"));
+}
+```
+Text can be measured
+
+```
+(8, 5)
+```
+
+```
+use kimono::*;
+
+const STYLE: Style = Style::new()
+    .padding(1)
+    .color(0xfffd7c)
+    .width(8)
+    .background(0x956471);
+
+fn main() {
+    println!("{:?}", STYLE.measure(abcdefghijklmno));
+}
+```
 
 # License
 
