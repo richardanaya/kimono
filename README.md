@@ -9,7 +9,17 @@ cargo add kimono
 ```
 # Example
 
-*Unicode text can be styled, padded, and bordered.*
+*Text can be styled*
+
+```rust
+const STYLE: Style = Style::new().bold().color(0x91b984);
+
+fn main() {
+    STYLE.render("こんにちは");
+}
+```
+
+*Unicode text can be padded, bordered, and positioned.*
 
 <img width="180" alt="Screen Shot 2022-07-23 at 5 01 28 PM" src="https://user-images.githubusercontent.com/294042/180626676-67a67dff-25fa-4deb-8cc9-683e17ca9a64.png">
 
