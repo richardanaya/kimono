@@ -4,7 +4,7 @@
 
 A simple terminal css engine inspired by [lipgloss](https://github.com/charmbracelet/lipgloss) for [truecolor 24-bit terminals](https://github.com/termstandard/colors#terminal-emulators).
 
-```rust
+```terminal
 cargo add kimono
 ```
 # Example
@@ -39,7 +39,7 @@ fn main() {
 
 <img width="188" alt="Screen Shot 2022-07-23 at 9 17 45 PM" src="https://user-images.githubusercontent.com/294042/180631984-110f096e-1b55-4a03-9e54-5e178a13034f.png">
 
-```
+```rust
 use kimono::*;
 
 const STYLE: Style = Style::new()
@@ -58,11 +58,11 @@ fn main() {
 
 *Text can be measured.*
 
-```
+```terminal
 (8, 5)
 ```
 
-```
+```rust
 use kimono::*;
 
 const STYLE: Style = Style::new()
