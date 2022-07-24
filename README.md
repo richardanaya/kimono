@@ -29,9 +29,9 @@ const STYLE: Style = Style::new()
     .background(0x407955);
 
 fn main() {
-    print!("{}{}", ClearScreen, CursorMove::XY(10, 3));
-    STYLE.render("着物");
-    print!("{}", CursorMove::XY(-10, 3));
+    clear_screen();
+    STYLE.render_at_position(10, 3, "着物");
+    print!("\n\r");
 }
 ```
 
@@ -49,10 +49,9 @@ const STYLE: Style = Style::new()
     .background(0x956471);
 
 fn main() {
-    print!("{}{}", ClearScreen, CursorMove::XY(10, 3));
-    STYLE.render(text);
-    print!("{}", CursorMove::XY(-10, 3));
-    println!("{:?}", STYLE.measure("abcdefghijklmno"));
+    clear_screen();
+    STYLE.render_at_position(10, 3, text);
+    print!("\n\r");
 }
 ```
 
@@ -109,7 +108,7 @@ const STYLE: Style = Style::new()
 fn main() {
     clear_screen();
     STYLE.render_at_position(10, 3, "The Tale of Genji by 紫 式部");
-    println!("\n\r");
+    print!("\n\r");
 }
 ```
 
