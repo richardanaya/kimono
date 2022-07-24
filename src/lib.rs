@@ -64,6 +64,10 @@ fn create_string_with_char(char: char, length: usize) -> String {
     s
 }
 
+fn get_unicode_length(s: &str) -> usize {
+    UnicodeWidthStr::width(s)
+}
+
 impl Style {
     pub const fn new() -> Style {
         Style {
@@ -185,7 +189,15 @@ impl Style {
     }
 
     pub fn render(&self, text: &str) {
-        let width = UnicodeWidthStr::width(text) + self.padding.left + self.padding.right;
+        let text: Vec<String> = text
+            .replace("\t", "    ")
+            .lines()
+            .map(|line| line.trim().to_string())
+            .collect();
+        let max_len = text
+            .iter()
+            .fold(0, |max, line| max.max(get_unicode_length(line)));
+        let width = max_len + self.padding.left + self.padding.right;
         let full_width = width + self.border.left + self.border.right;
         let top = create_string_with_char(' ', width);
         let bottom = create_string_with_char(' ', width);
@@ -340,48 +352,54 @@ impl Style {
         }
 
         // content
-        print!(
-            "{}",
-            border_left
-                .truecolor(
-                    self.border_color.0,
-                    self.border_color.1,
-                    self.border_color.2
-                )
-                .on_truecolor(
-                    self.border_background.0,
-                    self.border_background.1,
-                    self.border_background.2
-                )
-        );
-        print!(
-            "{}",
-            left.on_truecolor(self.background.0, self.background.1, self.background.2)
-        );
-        print!(
-            "{}",
-            text.truecolor(self.color.0, self.color.1, self.color.2)
+        for line in text.iter() {
+            print!(
+                "{}",
+                border_left
+                    .truecolor(
+                        self.border_color.0,
+                        self.border_color.1,
+                        self.border_color.2
+                    )
+                    .on_truecolor(
+                        self.border_background.0,
+                        self.border_background.1,
+                        self.border_background.2
+                    )
+            );
+            print!(
+                "{}",
+                left.on_truecolor(self.background.0, self.background.1, self.background.2)
+            );
+            let padding_len = max_len - get_unicode_length(line);
+            let padding = create_string_with_char(' ', padding_len);
+            print!(
+                "{}{}",
+                line.truecolor(self.color.0, self.color.1, self.color.2)
+                    .on_truecolor(self.background.0, self.background.1, self.background.2),
+                padding.truecolor(self.color.0, self.color.1, self.color.2)
                 .on_truecolor(self.background.0, self.background.1, self.background.2)
-        );
-        print!(
-            "{}",
-            right.on_truecolor(self.background.0, self.background.1, self.background.2),
-        );
-        print!(
-            "{}{}",
-            border_right
-                .truecolor(
-                    self.border_color.0,
-                    self.border_color.1,
-                    self.border_color.2
-                )
-                .on_truecolor(
-                    self.border_background.0,
-                    self.border_background.1,
-                    self.border_background.2
-                ),
-            CursorMove::XY(-(full_width as i16), 1)
-        );
+            );
+            print!(
+                "{}",
+                right.on_truecolor(self.background.0, self.background.1, self.background.2),
+            );
+            print!(
+                "{}{}",
+                border_right
+                    .truecolor(
+                        self.border_color.0,
+                        self.border_color.1,
+                        self.border_color.2
+                    )
+                    .on_truecolor(
+                        self.border_background.0,
+                        self.border_background.1,
+                        self.border_background.2
+                    ),
+                CursorMove::XY(-(full_width as i16), 1)
+            );
+        }
 
         // bottom
         for _ in 0..self.padding.bottom {

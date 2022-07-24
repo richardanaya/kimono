@@ -14,6 +14,6 @@ const STYLE: Style = Style::new()
 
 fn main() {
     print!("{}{}", ClearScreen, CursorMove::XY(10, 3));
-    STYLE.render("着物");
+    STYLE.render("着\t物\nkimono");
     print!("{}", CursorMove::XY(-10, 3));
 }
