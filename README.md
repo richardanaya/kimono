@@ -8,7 +8,7 @@ A simple terminal css engine inspired by [lipgloss](https://github.com/charmbrac
 cargo add kimono
 ```
 # Example
-<img width="189" alt="Screen Shot 2022-07-23 at 4 38 47 PM" src="https://user-images.githubusercontent.com/294042/180626222-c070e4a7-020c-43ed-96bc-79ebb28371f4.png">
+<img width="180" alt="Screen Shot 2022-07-23 at 5 01 28 PM" src="https://user-images.githubusercontent.com/294042/180626676-67a67dff-25fa-4deb-8cc9-683e17ca9a64.png">
 
 ```rust
 use kimono::*;
@@ -19,7 +19,9 @@ const STYLE: Style = Style::new()
     .padding_right(2)
     .padding_bottom(3)
     .border(1)
-    .border_color(0xbc5633)
+    .border_style(BORDER_STYLE_OUTLINE)
+    .border_color(0xddae74)
+    .border_background(0xbc5633)
     .color(0xebdeb8)
     .background(0x407955);
 
@@ -28,7 +30,6 @@ fn main() {
     STYLE.render("着物");
     print!("{}", CursorMove::XY(-10, 3));
 }
-
 ```
 
 
