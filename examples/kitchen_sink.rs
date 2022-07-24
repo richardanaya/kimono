@@ -50,7 +50,8 @@ const TAB_HOLDER: Style = TAB_SELECTED
         underline: false,
         strikethrough: false,
     })
-    .width(38);
+    .width(38)
+    .color(0xffffff);
 
 fn main() {
     clear_screen();
