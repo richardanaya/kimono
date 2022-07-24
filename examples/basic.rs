@@ -6,7 +6,9 @@ const STYLE: Style = Style::new()
     .padding_right(2)
     .padding_bottom(3)
     .border(1)
-    .border_color(0xbc5633)
+    .border_style(BORDER_STYLE_OUTLINE)
+    .border_color(0xddae74)
+    .border_background(0xbc5633)
     .color(0xebdeb8)
     .background(0x407955);
 
