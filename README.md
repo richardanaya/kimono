@@ -75,7 +75,7 @@ fn main() {
 }
 ```
 
-*Borders have advanced styling*
+*Borders have advanced styling.*
 
 <img width="330" alt="Screen Shot 2022-07-24 at 10 53 02 AM" src="https://user-images.githubusercontent.com/294042/180659763-273cc486-ecee-43dc-bff0-0fede6a5a219.png">
 
