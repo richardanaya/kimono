@@ -119,37 +119,6 @@ fn style_str(
     result
 }
 
-fn style_text(
-    text: &ColoredString,
-    color: Option<Color>,
-    background: Option<Color>,
-    bold: bool,
-    italic: bool,
-    underline: bool,
-    strikethrough: bool,
-) -> ColoredString {
-    let mut result: ColoredString = text.clone();
-    if let Some(color) = color {
-        result = result.truecolor(color.0, color.1, color.2);
-    }
-    if let Some(background) = background {
-        result = result.on_truecolor(background.0, background.1, background.2);
-    }
-    if bold {
-        result = result.bold();
-    }
-    if italic {
-        result = result.italic();
-    }
-    if underline {
-        result = result.underline();
-    }
-    if strikethrough {
-        result = result.strikethrough();
-    }
-    result
-}
-
 fn create_string_with_char(char: char, length: usize) -> String {
     let mut s = String::new();
     for _ in 0..length {
