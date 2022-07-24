@@ -87,8 +87,7 @@ fn main() {
 
 *Borders have advanced styling.*
 
-<img width="363" alt="Screen Shot 2022-07-24 at 1 30 28 PM" src="https://user-images.githubusercontent.com/294042/180664702-1db0090a-8936-4af6-a872-c073482a5aaf.png">
-
+<img width="340" alt="Screen Shot 2022-07-24 at 1 31 08 PM" src="https://user-images.githubusercontent.com/294042/180664733-0a9fcfb9-0129-40fe-96f9-a02426edb594.png">
 
 ```rust
 use kimono::*;
