@@ -7,9 +7,9 @@ A terminal style toolkit inspired by CSS and [lipgloss](https://github.com/charm
 ```terminal
 cargo add kimono
 ```
-# Example
+# Examples
 
-*Text can be styled*
+*Text can be styled.*
 
 ```rust
 const STYLE: Style = Style::new().bold().color(0x91b984);
