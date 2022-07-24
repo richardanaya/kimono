@@ -2,9 +2,9 @@
 
 <a href="https://docs.rs/kimono"><img src="https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square" alt="docs.rs docs" /></a>
 
-A simple terminal css engine inspired by [lipgloss](https://github.com/charmbracelet/lipgloss) for [truecolor 24-bit terminals](https://github.com/termstandard/colors#terminal-emulators).
+A terminal style toolkit inspired by CSS and [lipgloss](https://github.com/charmbracelet/lipgloss) for [truecolor 24-bit terminals](https://github.com/termstandard/colors#terminal-emulators).
 
-```rust
+```terminal
 cargo add kimono
 ```
 # Example
@@ -39,7 +39,7 @@ fn main() {
 
 <img width="188" alt="Screen Shot 2022-07-23 at 9 17 45 PM" src="https://user-images.githubusercontent.com/294042/180631984-110f096e-1b55-4a03-9e54-5e178a13034f.png">
 
-```
+```rust
 use kimono::*;
 
 const STYLE: Style = Style::new()
@@ -58,11 +58,11 @@ fn main() {
 
 *Text can be measured.*
 
-```
+```terminal
 (8, 5)
 ```
 
-```
+```rust
 use kimono::*;
 
 const STYLE: Style = Style::new()
@@ -72,7 +72,7 @@ const STYLE: Style = Style::new()
     .background(0x956471);
 
 fn main() {
-    println!("{:?}", STYLE.measure(abcdefghijklmno));
+    println!("{:?}", STYLE.measure("abcdefghijklmno"));
 }
 ```
 
