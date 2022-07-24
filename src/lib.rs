@@ -331,74 +331,112 @@ impl Style {
 
         let current_border_style = self.border_style.as_ref().unwrap_or(&BORDER_STYLE_DEFAULT);
 
-        let border_top = style_str(
-            &create_string_with_char(current_border_style.top.unwrap_or(' '), width),
-            current_border_style.bold,
-            current_border_style.italic,
-            current_border_style.underline,
-            current_border_style.strikethrough,
-        );
-        let border_bottom = style_str(
-            &create_string_with_char(current_border_style.bottom.unwrap_or(' '), width),
-            current_border_style.bold,
-            current_border_style.italic,
-            current_border_style.underline,
-            current_border_style.strikethrough,
-        );
-        let border_left = style_str(
-            &create_string_with_char(current_border_style.left.unwrap_or(' '), self.border.left),
-            current_border_style.bold,
-            current_border_style.italic,
-            current_border_style.underline,
-            current_border_style.strikethrough,
-        );
-        let border_right = style_str(
-            &create_string_with_char(current_border_style.right.unwrap_or(' '), self.border.right),
-            current_border_style.bold,
-            current_border_style.italic,
-            current_border_style.underline,
-            current_border_style.strikethrough,
-        );
-        let border_top_left =  style_str(&create_string_with_char(
-            current_border_style.top_left.unwrap_or(' '),
-            self.border.left,
-        ), current_border_style.bold, current_border_style.italic, current_border_style.underline, current_border_style.strikethrough);
-        let border_top_right = style_str(
-            &create_string_with_char(
-                current_border_style.top_right.unwrap_or(' '),
-                self.border.right,
-            ),
-            current_border_style.bold,
-            current_border_style.italic,
-            current_border_style.underline,
-            current_border_style.strikethrough,
-        );
-        let border_bottom_left = style_str(
-            &create_string_with_char(
-                current_border_style.bottom_left.unwrap_or(' '),
-                self.border.left,
-            ),
-            current_border_style.bold,
-            current_border_style.italic,
-            current_border_style.underline,
-            current_border_style.strikethrough,
-        );
-        let border_bottom_right = style_str(
-            &create_string_with_char(
-                current_border_style.bottom_right.unwrap_or(' '),
-                self.border.right,
-            ),
-            current_border_style.bold,
-            current_border_style.italic,
-            current_border_style.underline,
-            current_border_style.strikethrough,
-        );
+        let border_top = if let Some(b) = current_border_style.top {
+            style_str(
+                &create_string_with_char(b, width),
+                current_border_style.bold,
+                current_border_style.italic,
+                current_border_style.underline,
+                current_border_style.strikethrough,
+            )
+        } else {
+            let s: &str = &format!("{}", CursorMove::X(width as i16));
+            s.into()
+        };
+        let border_bottom = if let Some(b) = current_border_style.bottom {
+            style_str(
+                &create_string_with_char(b, width),
+                current_border_style.bold,
+                current_border_style.italic,
+                current_border_style.underline,
+                current_border_style.strikethrough,
+            )
+        } else {
+            let s: &str = &format!("{}", CursorMove::X(width as i16));
+            s.into()
+        };
+        let border_left = if let Some(b) = current_border_style.left {
+            style_str(
+                &create_string_with_char(b, self.border.left),
+                current_border_style.bold,
+                current_border_style.italic,
+                current_border_style.underline,
+                current_border_style.strikethrough,
+            )
+        } else {
+            let s: &str = &format!("{}", CursorMove::X(self.border.left as i16));
+            s.into()
+        };
+        let border_right = if let Some(b) = current_border_style.right {
+            style_str(
+                &create_string_with_char(b, self.border.right),
+                current_border_style.bold,
+                current_border_style.italic,
+                current_border_style.underline,
+                current_border_style.strikethrough,
+            )
+        } else {
+            let s: &str = &format!("{}", CursorMove::X(self.border.right as i16));
+            s.into()
+        };
+        let border_top_left = if let Some(b) = current_border_style.top_left {
+            style_str(
+                &create_string_with_char(b, self.border.left),
+                current_border_style.bold,
+                current_border_style.italic,
+                current_border_style.underline,
+                current_border_style.strikethrough,
+            )
+        } else {
+            let s: &str = &format!("{}", CursorMove::X(self.border.left as i16));
+            s.into()
+        };
+
+        let border_top_right = if let Some(b) = current_border_style.top_right {
+            style_str(
+                &create_string_with_char(b, self.border.right),
+                current_border_style.bold,
+                current_border_style.italic,
+                current_border_style.underline,
+                current_border_style.strikethrough,
+            )
+        } else {
+            let s: &str = &format!("{}", CursorMove::X(self.border.right as i16));
+            s.into()
+        };
+
+        let border_bottom_left = if let Some(b) = current_border_style.bottom_left {
+            style_str(
+                &create_string_with_char(b, self.border.left),
+                current_border_style.bold,
+                current_border_style.italic,
+                current_border_style.underline,
+                current_border_style.strikethrough,
+            )
+        } else {
+            let s: &str = &format!("{}", CursorMove::X(self.border.left as i16));
+            s.into()
+        };
+
+        let border_bottom_right = if let Some(b) = current_border_style.bottom_right {
+            style_str(
+                &create_string_with_char(b, self.border.right),
+                current_border_style.bold,
+                current_border_style.italic,
+                current_border_style.underline,
+                current_border_style.strikethrough,
+            )
+        } else {
+            let s: &str = &format!("{}", CursorMove::X(self.border.right as i16));
+            s.into()
+        };
 
         // top
         for _ in 0..self.border.top {
             print!(
                 "{}",
-                border_top_left.clone()
+                border_top_left
+                    .clone()
                     .truecolor(
                         self.border_color.0,
                         self.border_color.1,

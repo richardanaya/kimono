@@ -1,6 +1,6 @@
 [package]
 name = "kimono"
-version = "0.0.7"
+version = "0.1.0"
 authors = ["Richard Anaya"]
 edition = "2018"
 description = "A terminal style toolkit inspired by CSS for elegant TUIs"
