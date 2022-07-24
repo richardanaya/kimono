@@ -72,7 +72,7 @@ const STYLE: Style = Style::new()
     .background(0x956471);
 
 fn main() {
-    println!("{:?}", STYLE.measure(abcdefghijklmno));
+    println!("{:?}", STYLE.measure("abcdefghijklmno"));
 }
 ```
 
