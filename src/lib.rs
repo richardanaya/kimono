@@ -302,6 +302,8 @@ impl Style {
                             }
                             new_lines.push(new_line);
                             break;
+                        } else {
+                            new_lines.push(line.clone());
                         }
                     }
                 }
@@ -314,9 +316,12 @@ impl Style {
             max_content_height = max_content_height.max(0);
             text = text.iter().take(max_content_height).cloned().collect();
         }
-        let max_len = text
+        let mut max_len = text
             .iter()
             .fold(0, |max, line| max.max(get_unicode_length(line)));
+        if let Some(w) = self.width {
+            max_len = w;
+        }
         (text, max_len)
     }
 
