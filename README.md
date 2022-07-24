@@ -122,6 +122,16 @@ fn main() {
 }
 ```
 
+# Art
+
+Kimono patterns inspired from Unix terminals.
+
+![1658677463667](https://user-images.githubusercontent.com/294042/180660263-281711c1-d29d-48f2-bee4-32b8f0658fd7.jpeg)
+
+![1658677463603](https://user-images.githubusercontent.com/294042/180660265-1a82172d-1b89-4ab6-b653-b496f2396b24.jpeg)
+
+![1658677461856](https://user-images.githubusercontent.com/294042/180660271-d5085b4d-bd4e-463c-acb5-5ed425b92403.jpeg)
+
 # License
 
 This project is licensed under either of
