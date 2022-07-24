@@ -45,7 +45,7 @@ fn main() {
 }
 ```
 
-*Text can be constrained to height and width.*
+*Text can be constrained to width and/or height.*
 
 <img width="188" alt="Screen Shot 2022-07-23 at 9 17 45 PM" src="https://user-images.githubusercontent.com/294042/180631984-110f096e-1b55-4a03-9e54-5e178a13034f.png">
 
