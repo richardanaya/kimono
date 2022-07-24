@@ -4,6 +4,8 @@
 
 A terminal style toolkit inspired by CSS and [lipgloss](https://github.com/charmbracelet/lipgloss) for [truecolor 24-bit terminals](https://github.com/termstandard/colors#terminal-emulators).  Made for elegant TUIs.
 
+<img width="817" alt="Screen Shot 2022-07-24 at 3 32 40 PM" src="https://user-images.githubusercontent.com/294042/180668459-f4a6b417-2b55-42b2-a036-980916440749.png">
+
 ```terminal
 cargo add kimono
 ```
