@@ -12,6 +12,8 @@ cargo add kimono
 *Text can be styled.*
 
 ```rust
+use kimono::*;
+
 const STYLE: Style = Style::new().bold().color(0x91b984);
 
 fn main() {
@@ -60,7 +62,7 @@ const STYLE: Style = Style::new()
 
 fn main() {
     clear_screen();
-    STYLE.render_at_position(10, 3, text);
+    STYLE.render_at_position(10, 3, "abcdefghijklmno");
     print!("\n\r");
 }
 ```
