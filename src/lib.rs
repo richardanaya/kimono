@@ -556,6 +556,36 @@ impl Style {
             );
         }
 
+        if let Some(h) = self.height {
+            let max_content_height =
+                (h - self.border.top - self.padding.top - self.padding.bottom).max(0);
+            let excess_lines = (max_content_height - text.len()).max(0);
+
+            let padding = create_string_with_char(' ', max_len);
+            for _ in 0..excess_lines {
+                print!("{}", border_left);
+                print!("{}", left);
+                print!(
+                    "{}",
+                    style_str(
+                        &padding,
+                        self.color,
+                        self.background,
+                        false,
+                        false,
+                        false,
+                        false
+                    )
+                );
+                print!("{}", right,);
+                print!(
+                    "{}{}",
+                    border_right,
+                    CursorMove::XY(-(full_width as i16), 1)
+                );
+            }
+        }
+
         // bottom
         for _ in 0..self.padding.bottom {
             print!("{}", border_left);
