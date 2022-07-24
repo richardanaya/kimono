@@ -62,7 +62,7 @@ const STYLE: Style = Style::new()
 
 fn main() {
     clear_screen();
-    STYLE.render_at_position(10, 3, text);
+    STYLE.render_at_position(10, 3, "abcdefghijklmno");
     print!("\n\r");
 }
 ```
