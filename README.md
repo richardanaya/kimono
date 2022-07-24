@@ -99,14 +99,14 @@ const STYLE: Style = Style::new()
     .border(1)
     .italic()
     .border_style(BorderStyle {
-        top_left: Some(' '),
+        top_left: None,
         top: Some('•'),
-        top_right: Some(' '),
+        top_right: None,
         left: Some('•'),
         right: Some('•'),
-        bottom_left: Some(' '),
+        bottom_left: None,
         bottom: Some('•'),
-        bottom_right: Some(' '),
+        bottom_right: None,
         bold: true,
         italic: false,
         underline: false,
