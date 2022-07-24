@@ -59,8 +59,17 @@ Text can be measured
 ```
 
 ```
-let text = "abcdefghijklmno";
-println!("{:?}", STYLE.measure(text));
+use kimono::*;
+
+const STYLE: Style = Style::new()
+    .padding(1)
+    .color(0xfffd7c)
+    .width(8)
+    .background(0x956471);
+
+fn main() {
+    println!("{:?}", STYLE.measure(abcdefghijklmno));
+}
 ```
 
 # License
