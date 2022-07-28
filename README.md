@@ -5,7 +5,7 @@
 A terminal style toolkit inspired by CSS and [lipgloss](https://github.com/charmbracelet/lipgloss) for [truecolor 24-bit terminals](https://github.com/termstandard/colors#terminal-emulators).  Made for elegant TUIs.
 
 <p align="center">
-<img width="746" alt="Screen Shot 2022-07-28 at 9 29 55 AM" src="https://user-images.githubusercontent.com/294042/181590199-d1994c68-dc5d-4457-8000-978c007f537b.png">
+<img width="809" alt="Screen Shot 2022-07-28 at 9 32 59 AM" src="https://user-images.githubusercontent.com/294042/181590722-38f30f65-cb66-4734-ba01-435614d604c8.png">
 </p>
 
 Image drawn by our sister project [ukiyeo](https://github.com/richardanaya/ukiyoe/).
