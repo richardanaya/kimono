@@ -130,6 +130,28 @@ fn main() {
 }
 ```
 
+*Text can be aligned.*
+
+<img width="315" alt="Screen Shot 2022-07-30 at 2 10 38 PM" src="https://user-images.githubusercontent.com/294042/181996305-1de7aa50-f69a-4316-9f26-5a339ec194e6.png">
+
+```rust
+use kimono::*;
+
+const STYLE: Style = Style::new()
+    .padding(1)
+    .color(0xb1a49a)
+    .background(0xea664d)
+    .border(1)
+    .width(30)
+    .text_align(TextAlign::Center);
+
+fn main() {
+    clear_screen();
+    STYLE.render_at_position(10, 3, "sun egg mango");
+    print!("\n\r");
+}
+```
+
 # Art
 
 Kimono patterns inspired from Unix terminals.
