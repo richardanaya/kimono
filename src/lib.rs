@@ -72,6 +72,13 @@ pub const BORDER_STYLE_THICK_OUTLINE: BorderStyle = BorderStyle {
     strikethrough: false,
 };
 
+#[derive(PartialEq)]
+pub enum TextAlign {
+    Left,
+    Right,
+    Center,
+}
+
 pub struct Style {
     color: Option<Color>,
     background: Option<Color>,
@@ -86,6 +93,7 @@ pub struct Style {
     italic: bool,
     underline: bool,
     strikethrough: bool,
+    text_align: TextAlign,
 }
 
 fn style_str(
@@ -157,11 +165,17 @@ impl Style {
             italic: false,
             underline: false,
             strikethrough: false,
+            text_align: TextAlign::Left,
         }
     }
 
     pub const fn border_style(mut self, border_style: BorderStyle) -> Style {
         self.border_style = Some(border_style);
+        self
+    }
+
+    pub const fn text_align(mut self, text_align: TextAlign) -> Style {
+        self.text_align = text_align;
         self
     }
 
@@ -495,9 +509,28 @@ impl Style {
             print!("{}", border_left);
             print!("{}", left);
             let padding_len = max_len - get_unicode_length(line);
-            let padding = create_string_with_char(' ', padding_len);
+            let mut right_padding = create_string_with_char(' ', padding_len);
+            let mut left_padding: String = String::new();
+            if self.text_align == TextAlign::Center {
+                let left_padding_len = (padding_len / 2) as usize;
+                let right_padding_len = padding_len - left_padding_len;
+                left_padding = create_string_with_char(' ', left_padding_len);
+                right_padding = create_string_with_char(' ', right_padding_len);
+            } else if self.text_align == TextAlign::Right {
+                left_padding = create_string_with_char(' ', padding_len);
+                right_padding = String::new();
+            }
             print!(
-                "{}{}",
+                "{}{}{}",
+                style_str(
+                    &left_padding,
+                    self.color,
+                    self.background,
+                    false,
+                    false,
+                    false,
+                    false
+                ),
                 style_str(
                     &line,
                     self.color,
@@ -508,7 +541,7 @@ impl Style {
                     self.strikethrough
                 ),
                 style_str(
-                    &padding,
+                    &right_padding,
                     self.color,
                     self.background,
                     false,

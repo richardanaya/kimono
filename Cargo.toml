@@ -1,6 +1,6 @@
 [package]
 name = "kimono"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Richard Anaya"]
 edition = "2018"
 description = "A terminal style toolkit inspired by CSS for elegant TUIs"
@@ -12,3 +12,6 @@ readme="README.md"
 ansi-escapes = "0.1.1"
 colored = "2.0.0"
 unicode-width = "0.1.9"
+
+[dev-dependencies]
+ukiyoe = "0"
