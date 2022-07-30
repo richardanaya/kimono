@@ -4,6 +4,12 @@
 
 A terminal style toolkit inspired by CSS and [lipgloss](https://github.com/charmbracelet/lipgloss) for [truecolor 24-bit terminals](https://github.com/termstandard/colors#terminal-emulators).  Made for elegant TUIs.
 
+<p align="center">
+<img width="812" alt="Screen Shot 2022-07-30 at 10 57 29 AM" src="https://user-images.githubusercontent.com/294042/181935810-4b355c78-8838-438b-9aca-cdba235aadb6.png">
+</p>
+
+Image terminal rendering done by our sister project [ukiyeo](https://github.com/richardanaya/ukiyoe/).
+
 ```terminal
 cargo add kimono
 ```
@@ -120,6 +126,28 @@ const STYLE: Style = Style::new()
 fn main() {
     clear_screen();
     STYLE.render_at_position(10, 3, "The Tale of Genji by 紫 式部");
+    print!("\n\r");
+}
+```
+
+*Text can be aligned.*
+
+<img width="315" alt="Screen Shot 2022-07-30 at 2 10 38 PM" src="https://user-images.githubusercontent.com/294042/181996305-1de7aa50-f69a-4316-9f26-5a339ec194e6.png">
+
+```rust
+use kimono::*;
+
+const STYLE: Style = Style::new()
+    .padding(1)
+    .color(0xb1a49a)
+    .background(0xea664d)
+    .border(1)
+    .width(30)
+    .text_align(TextAlign::Center);
+
+fn main() {
+    clear_screen();
+    STYLE.render_at_position(10, 3, "sun egg mango");
     print!("\n\r");
 }
 ```
