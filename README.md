@@ -8,7 +8,7 @@ A terminal style toolkit inspired by CSS and [lipgloss](https://github.com/charm
 <img width="812" alt="Screen Shot 2022-07-30 at 10 57 29 AM" src="https://user-images.githubusercontent.com/294042/181935810-4b355c78-8838-438b-9aca-cdba235aadb6.png">
 </p>
 
-Image drawn by our sister project [ukiyeo](https://github.com/richardanaya/ukiyoe/).
+Image terminal rendering done by our sister project [ukiyeo](https://github.com/richardanaya/ukiyoe/).
 
 ```terminal
 cargo add kimono
